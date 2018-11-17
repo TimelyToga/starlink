@@ -1,12 +1,34 @@
+import java.util.ArrayList;
+
 float t = 0;
 
 int numOrbitals = 24;
+int numSats = 50;
 float earthSize = 250;
 float phaseOneOffset = 100;
-float phaseOneSize = (earthSize + phaseOneOffset) * 2;
+float phaseOneRadius = (earthSize + phaseOneOffset) * 2;
+float phaseOneRotationOffset = radians(360 / numOrbitals);
+float phaseOneInclination = radians(22.5);
+
+ArrayList<Orbital> orbitals;
+
+Point center() {
+ return new Point(0, 0, 0); 
+}
 
 void setup() {
   size(600, 480, P3D);
+  
+  orbitals = new ArrayList<Orbital>();
+  
+  for(float a = -PI; a < PI; a += phaseOneRotationOffset) {
+    orbitals.add(new Orbital(center(),
+      numSats,
+      0.0,
+      phaseOneRadius,
+      phaseOneInclination,
+      a));
+  }
 }
 
 void draw() {
@@ -15,29 +37,34 @@ void draw() {
   
   // Center Earth
   translate(300, 240, -500);
+  
+  //// Orbitals
+  //pushMatrix();
 
-  float phaseOneRotationOffset = 360 / numOrbitals;
-  stroke(255);
-  noFill();
-  rotateY(t);
-  pushMatrix();
-  rotateX(PI/2);
-  for(int a = 0; a < numOrbitals; a++) {  
-      stroke(255);
-      ellipse(0, 0, phaseOneSize, phaseOneSize);
-      rotateY(radians(15));
-      rotateZ(radians(phaseOneRotationOffset));
-      //rotateX(phaseOneRotationOffset);
+  
+  ////// All orbitals need these rotations 
+  ////for(float a = -PI; a < PI; a += radians(phaseOneRotationOffset)) {  
+  ////  pushMatrix();
+  ////  //rotateX(radians(15));
+  ////  rotateX(PI/2);
+  ////  rotateZ(a - t);
+  ////  rotateY(radians(20));
+  ////  ellipse(0, 0, phaseOneSize, phaseOneSize);
+  ////  popMatrix();
+  ////}
+  ////rotateY(15);
+  //popMatrix();
+  for(Orbital o: orbitals) {
+    o.draw(t);
   }
-  //rotateY(15);
-  popMatrix();
   
   // Rotate Earth
   //pushMatrix();
-  fill(0);
+  fill(100, 45, 180);
   rotateY(t);
+  noStroke();
   sphere(earthSize);
   //popMatrix();
     
-  t += 0.01;
+  t += 0.007;
 }
