@@ -19,7 +19,7 @@ class Orbital implements Drawable{
       float offsetDelta = radians(360/numSats);
       float curDelta = phaseOffset;
       for(int s = 0; s < numSats; s++){
-        this.sContexts.add(new KeplerianContext(radius, inclination, orientation, curDelta));
+        this.sContexts.add(new KeplerianContext(radius / 2, inclination, orientation, curDelta));
         curDelta += offsetDelta;
       }
   }
@@ -32,17 +32,19 @@ class Orbital implements Drawable{
     
     rotateX(PI/2);
     rotateZ(kContext.orientation - t);
+    //rotateZ(kContext.orientation);
     rotateY(kContext.inclination);
     //translate(0, 0, center.z);
     ellipse(center.x, center.y, kContext.radius, kContext.radius);
-    
     popMatrix();
    
-   // Draw all satellites
-   for(KeplerianContext s: this.sContexts) {
-     pushMatrix();
-     
-     popMatrix();
-   }
+     // Draw all satellites
+     for(KeplerianContext s: this.sContexts) {
+       pushMatrix();
+       Point satCenter = s.locate(t);
+       translate(satCenter.x, satCenter.y, satCenter.z);
+       box(5);
+       popMatrix();
+     }
   }
 }

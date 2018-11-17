@@ -36,7 +36,7 @@ void draw() {
   background(0, 0, 100);
   
   // Center Earth
-  translate(300, 240, -500);
+  translate(300, 240, -800);
   
   //// Orbitals
   //pushMatrix();
