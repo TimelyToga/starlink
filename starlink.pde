@@ -17,7 +17,8 @@ Point center() {
 }
 
 void setup() {
-  size(600, 480, P3D);
+  size(800, 640, P3D);
+  smooth(4);
   
   orbitals = new ArrayList<Orbital>();
   
@@ -36,35 +37,22 @@ void draw() {
   background(0, 0, 100);
   
   // Center Earth
-  translate(300, 240, -800);
+  translate(400, 320, -300);
   
-  //// Orbitals
-  //pushMatrix();
-
-  
-  ////// All orbitals need these rotations 
-  ////for(float a = -PI; a < PI; a += radians(phaseOneRotationOffset)) {  
-  ////  pushMatrix();
-  ////  //rotateX(radians(15));
-  ////  rotateX(PI/2);
-  ////  rotateZ(a - t);
-  ////  rotateY(radians(20));
-  ////  ellipse(0, 0, phaseOneSize, phaseOneSize);
-  ////  popMatrix();
-  ////}
-  ////rotateY(15);
-  //popMatrix();
   for(Orbital o: orbitals) {
     o.draw(t);
   }
   
-  // Rotate Earth
-  //pushMatrix();
+  // Earth
   fill(100, 45, 180);
   rotateY(t);
   noStroke();
   sphere(earthSize);
-  //popMatrix();
+
+  // Earth cube
+  noFill();
+  stroke(255);
+  box(earthSize * 3);
     
-  t += 0.007;
+  t += 0.004;
 }

@@ -28,6 +28,7 @@ class Orbital implements Drawable{
     // Draw orbital
     pushMatrix();
     stroke(255);
+    strokeWeight(2);
     noFill();
     
     rotateX(PI/2);
@@ -39,12 +40,12 @@ class Orbital implements Drawable{
     popMatrix();
    
      // Draw all satellites
-     for(KeplerianContext s: this.sContexts) {
-       pushMatrix();
-       Point satCenter = s.locate(t);
-       translate(satCenter.x, satCenter.y, satCenter.z);
-       box(5);
-       popMatrix();
-     }
+     //for(KeplerianContext s: this.sContexts) {
+     //  pushMatrix();
+     //  Point satCenter = s.locate(t);
+     //  translate(satCenter.x, satCenter.y, satCenter.z);
+     //  box(5);
+     //  popMatrix();
+     //}
   }
 }
