@@ -39,20 +39,20 @@ void draw() {
   // Center Earth
   translate(400, 320, -300);
   
-  for(Orbital o: orbitals) {
-    o.draw(t);
-  }
-  
   // Earth
   fill(100, 45, 180);
   rotateY(t);
   noStroke();
   sphere(earthSize);
+  
+  for(Orbital o: orbitals) {
+    o.draw(t);
+  }
 
   // Earth cube
   noFill();
   stroke(255);
   box(earthSize * 3);
     
-  t += 0.004;
+  t += 0.001;
 }

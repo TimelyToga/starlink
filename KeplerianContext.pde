@@ -19,12 +19,10 @@ class KeplerianContext {
   
   public Point locate(float t) {
     float curOffset = phaseOffset + t;
-    float x = (radius) * sin(inclination + curOffset) * cos(orientation);
-    float y = (radius) * sin(inclination + curOffset) * sin(orientation);
-    float z = (radius) * cos(inclination + curOffset);
+    float x = (radius) * sin(inclination) * cos(orientation);
+    float y = (radius) * sin(inclination) * sin(orientation);
+    float z = (radius) * cos(inclination);
 
-    //return new Point(y, z, x);
-        return new Point(x, y, z); 
-
+    return new Point(x, y, z); 
   }
 }

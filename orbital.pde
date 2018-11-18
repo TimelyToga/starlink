@@ -37,15 +37,16 @@ class Orbital implements Drawable{
     rotateY(kContext.inclination);
     //translate(0, 0, center.z);
     ellipse(center.x, center.y, kContext.radius, kContext.radius);
-    popMatrix();
-   
+    
      // Draw all satellites
-     //for(KeplerianContext s: this.sContexts) {
-     //  pushMatrix();
-     //  Point satCenter = s.locate(t);
-     //  translate(satCenter.x, satCenter.y, satCenter.z);
-     //  box(5);
-     //  popMatrix();
-     //}
+     for(KeplerianContext s: this.sContexts) {
+       pushMatrix();
+       Point satCenter = s.locate(t);
+       //rotateY(kContext.orientation);
+       translate(cos(s.phaseOffset - t)*s.radius, s.radius*sin(s.phaseOffset - t), 0);
+       box(5);
+       popMatrix();
+     }
+    popMatrix();
   }
 }
